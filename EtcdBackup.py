@@ -1,4 +1,5 @@
 import os
+import json
 import base64
 
 # ETCD config
@@ -20,4 +21,5 @@ cmd = 'ETCDCTL_API=3 etcdctl --cacert={} --cert={} --key={} --endpoints={} -w=js
 
 # initialize
 p = os.popen(init_cmd)
-p.read()
+s = p.read()
+d = json.load(s)
