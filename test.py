@@ -2,16 +2,18 @@ import os
 import json
 import time
 import csv
+import pandas as pd
 
 with open('test.csv', 'w') as fp:
     writer = csv.writer(fp, dialect='unix')
 
     writer.writerow(['uid', 'createDate', 'startTime', 'endTime', 'cpu_num', 'mem(GB)', 'gpu_num', 'worker_num'])
-    writer.writerows([['1', 2, 3, 4, 4, 4, 4, 4], ['2', 3, 4, 5, 8, 8, 8, 1]])
+    writer.writerows([['d9w8', 2, 3, 4, 4, 4, 4, 4], ['2', 3, 4, 5, 8, 8, 8, 1]])
     fp.close()
 
+df = pd.read_csv('test.csv')
+uid = df['uid'][0]
 
-print(int(time.time()))
 key_set = {'a', 'b', 'c'}
 element = 'd'
 if element not in key_set:
