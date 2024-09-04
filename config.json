@@ -2,7 +2,7 @@
   "etcd_cacert_path":  "/etc/kubernetes/pki/etcd/ca.crt",
   "etcd_cert_path": "/etc/kubernetes/pki/etcd/server.crt",
   "etcd_key_path": "/etc/kubernetes/pki/etcd/server.key",
-  "etcd_endpoints": "https://10.105.12.159:2379,https://10.105.12.158:2379,https://10.105.12.157:2379",
+  "etcd_endpoints": "https://10.200.53.189:2379,https://10.200.53.190:2379,https://10.200.53.191:2379",
   "key_prefix": "/registry/scheduling.volcano.sh/podgroups/default",
   "start_revision_file": "start_revision.txt"
 }

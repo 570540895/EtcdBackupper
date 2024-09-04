@@ -6,6 +6,9 @@ import csv
 
 csv_file = 'output/data-{}.csv'.format(str(int(time.time())))
 
+start_time_offset = 0
+end_time_offset = 0
+
 def get_etcd_data():
     # get etcdctl config
     with open('./config.json', 'r') as f:
