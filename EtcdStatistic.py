@@ -21,7 +21,7 @@ def get_num(str):
     i = 0
     for c in str:
         if '0' <= c <= '9':
-            i = i*10+(ord(c)-ord('0'))
+            i = i * 10 + (ord(c) - ord('0'))
         else:
             break
     return i
@@ -55,7 +55,7 @@ def get_etcd_data():
     '''
 
     # 临时使用
-    etcd_end_revision = etcd_start_revision + 300000
+    etcd_end_revision = etcd_start_revision + 50000
 
     with open(csv_file, 'w') as fp:
         writer = csv.writer(fp, dialect='unix')
@@ -63,6 +63,10 @@ def get_etcd_data():
         key_set = set({})
         etcd_revision = etcd_start_revision
         while etcd_revision <= etcd_end_revision:
+
+            if (etcd_revision - etcd_start_revision) % 1000 == 0:
+                print("etcd_revision: {}/n".format(etcd_revision))
+
             cmd = 'ETCDCTL_API=3 etcdctl --cacert={} --cert={} --key={} --endpoints={} -w=json get --prefix {} --rev={}'.format(
                 etcd_cacert_path, etcd_cert_path, etcd_key_path, etcd_endpoints, key_prefix, etcd_revision
             )
@@ -70,7 +74,7 @@ def get_etcd_data():
             res_s = res.read()
 
             # 临时使用
-            if len(res_s) < 10:
+            if len(res_s) < 5:
                 continue
             etcd_revision = etcd_revision + 1
 
@@ -103,7 +107,8 @@ def get_etcd_data():
                 end_time = start_time + duration
                 cpu_num = get_num(value_d['spec']['minResources']['requests.cpu'])
                 mem = get_num(value_d['spec']['minResources']['requests.memory'])
-                gpu_num = int(int(value_d['spec']['minResources']['zhejianglab.com/gpu'])/int(value_d['spec']['minResources']['pods']))
+                gpu_num = int(int(value_d['spec']['minResources']['zhejianglab.com/gpu']) / int(
+                    value_d['spec']['minResources']['pods']))
                 worker_num = int(value_d['spec']['minMember'])
                 writer.writerow([uid, create_date, start_time, end_time, cpu_num, mem, gpu_num, worker_num])
         fp.close()
