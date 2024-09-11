@@ -55,7 +55,7 @@ def get_etcd_data():
     '''
 
     # 临时使用
-    etcd_end_revision = etcd_start_revision + 4000
+    etcd_end_revision = etcd_start_revision + 2000
 
     with open(csv_file, 'w') as fp:
         writer = csv.writer(fp, dialect='unix')
