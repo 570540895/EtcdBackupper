@@ -64,7 +64,7 @@ def get_etcd_data():
         etcd_revision = etcd_start_revision
         while etcd_revision <= etcd_end_revision:
 
-            if (etcd_revision - etcd_start_revision) % 10 == 0:
+            if (etcd_revision - etcd_start_revision) % 1000 == 0:
                 print("etcd_revision: {}".format(etcd_revision))
 
             cmd = 'ETCDCTL_API=3 etcdctl --cacert={} --cert={} --key={} --endpoints={} -w=json get --prefix {} --rev={}'.format(
