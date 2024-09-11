@@ -86,6 +86,10 @@ def get_etcd_data():
                 value_d = json.loads(value)
                 uid = value_d['metadata']['ownerReferences'][0]['uid']
                 create_date = utctime2timestamp(value_d['metadata']['creationTimestamp'])
+                if 'status' not in value_d.keys():
+                    continue
+                if 'conditions' not in value_d['status'].keys():
+                    continue
                 conditions = value_d['status']['conditions']
                 for condition in conditions:
                     if condition['type'] == 'Scheduled':
