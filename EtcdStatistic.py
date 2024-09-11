@@ -70,8 +70,11 @@ def get_etcd_data():
             cmd = 'ETCDCTL_API=3 etcdctl --cacert={} --cert={} --key={} --endpoints={} -w=json get --prefix {} --rev={}'.format(
                 etcd_cacert_path, etcd_cert_path, etcd_key_path, etcd_endpoints, key_prefix, etcd_revision
             )
+            print(cmd)
+
             res = os.popen(cmd)
             res_s = res.read()
+            print(res_s)
 
             # 临时使用
             if len(res_s) < 5:
