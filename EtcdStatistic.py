@@ -55,7 +55,7 @@ def get_etcd_data():
     '''
 
     # 临时使用
-    etcd_end_revision = etcd_start_revision + 20
+    etcd_end_revision = etcd_start_revision + 200
 
     with open(csv_file, 'w') as fp:
         writer = csv.writer(fp, dialect='unix')
@@ -70,11 +70,11 @@ def get_etcd_data():
             cmd = 'ETCDCTL_API=3 etcdctl --cacert={} --cert={} --key={} --endpoints={} -w=json get --prefix {} --rev={}'.format(
                 etcd_cacert_path, etcd_cert_path, etcd_key_path, etcd_endpoints, key_prefix, etcd_revision
             )
-            print(cmd)
+            # print(cmd)
 
             res = os.popen(cmd)
             res_s = res.read()
-            print(res_s)
+            # print(res_s)
 
             # 临时使用
             if len(res_s) < 5:
@@ -113,7 +113,7 @@ def get_etcd_data():
                 gpu_num = int(int(value_d['spec']['minResources']['zhejianglab.com/gpu']) / int(
                     value_d['spec']['minResources']['pods']))
                 worker_num = int(value_d['spec']['minMember'])
-                print(uid+create_date+start_time)
+
                 writer.writerow([uid, create_date, start_time, end_time, cpu_num, mem, gpu_num, worker_num])
         fp.close()
 
