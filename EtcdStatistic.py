@@ -74,7 +74,7 @@ def get_etcd_data():
 
             res = os.popen(cmd)
             res_s = res.read()
-            # print(res_s)
+            print(res_s)
 
             # 临时使用
             if len(res_s) < 5:
