@@ -76,6 +76,8 @@ def get_etcd_data():
 
             res_d = json.loads(res_s)
 
+            if 'kvs' not in res_d.keys():
+                continue
             kvs = res_d['kvs']
             for kv in kvs:
                 key = base64.b64decode(kv['key'])
